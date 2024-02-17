@@ -1,0 +1,53 @@
+* {
+  /* Light theme */
+  --background-light: hsl(0, 0%, 98%);
+  --elements-light: hsl(0, 0%, 100%);
+  --text-light: hsl(200, 15%, 8%);
+  --accent-light: hsla(var(--text-gray), 0.1);
+
+  /* Dark theme */
+  --background-dark: hsl(207, 26%, 17%);
+  --elements-dark: hsl(209, 23%, 22%);
+  --text-dark: hsl(0, 0%, 100%);
+  --accent-dark: hsl(208, 23%, 29%);
+
+  --app-margin-desktop: 4.5rem;
+  --app-margin-mobile: 1.5rem;
+  --app-border-radius: 0.3rem;
+
+  --text-gray: 200, 15%, 8%;
+}
+
+:root {
+  --app-margin: var(--app-margin-desktop);
+}
+
+@media only screen and (max-width: 64em) {
+  :root {
+    --app-margin: var(--app-margin-mobile);
+  }
+}
+
+:root {
+  color-scheme: light;
+  --background: var(--background-light);
+  --elements: var(--elements-light);
+  --text: var(--text-light);
+  --accent: var(--accent-light);
+  --fill: hsla(var(--text-gray), 0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: var(--background-dark);
+    --elements: var(--elements-dark);
+    --text: var(--text-dark);
+    --accent: var(--accent-dark);
+    --fill: var(--text-dark);
+  }
+}
+
+.appShadow {
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
+}

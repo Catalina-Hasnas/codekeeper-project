@@ -1,0 +1,64 @@
+.previewCard {
+  background-color: var(--elements);
+  border-radius: var(--app-border-radius);
+}
+
+.previewCardImageContainer {
+  position: relative;
+  min-height: 12em;
+}
+
+.previewCardImage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  color: transparent;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: var(--app-border-radius);
+  border-top-right-radius: var(--app-border-radius);
+}
+
+.previewCardPresentationText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding-block: 1em;
+  padding-inline: 3em;
+  font-size: 0.875rem;
+}
+
+.previewCardPresentationText a {
+  position: relative;
+}
+
+.previewCardPresentationText a::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: var(--text);
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 300ms;
+}
+
+.previewCardPresentationText a:hover::after,
+.previewCardPresentationText a:focus::after {
+  transform: scale(1);
+}
+
+.previewCardPresentationText a {
+  font-size: 1rem;
+  font-stretch: expanded;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.previewCardPresentationText span {
+  font-weight: 600;
+}

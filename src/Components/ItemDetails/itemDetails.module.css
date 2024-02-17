@@ -1,0 +1,98 @@
+.itemDetailsInfo {
+  grid-area: description;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  line-height: 1.5rem;
+  padding-block: 2em;
+}
+
+.itemDetailsInfoList {
+  column-count: 2;
+  column-gap: 2em;
+}
+
+.itemDetailsInfoList span {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 64em) {
+  .itemDetailsInfoList {
+    column-count: unset;
+    column-gap: unset;
+  }
+  .itemDetailsContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(1em, 13em) auto auto;
+    grid-template-areas:
+      "image"
+      "description"
+      "border";
+  }
+}
+
+.backButton {
+  display: grid;
+  grid-template-columns: 20px 5px auto;
+  margin-block: 3rem;
+  padding-block: 0.8em;
+  padding-inline: 2.2em;
+  background-color: var(--elements);
+  border-radius: var(--app-border-radius);
+  transition: grid-template-columns 300ms, background-color 300ms;
+}
+
+.backButton span {
+  grid-column: 3;
+}
+
+.backButton:hover {
+  background-color: var(--accent);
+  grid-template-columns: 15px 10px auto;
+}
+
+.backButton::before {
+  content: "\2190";
+  justify-self: end;
+  padding-inline-end: 0.5em;
+}
+
+.keywords {
+  grid-area: border;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.keywords h3 {
+  font-size: 1rem;
+}
+
+.keywords ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: baseline;
+}
+
+.keywords li {
+  position: relative;
+  width: 8rem;
+  padding-block: 1em;
+  background-color: var(--elements);
+  transition: all 300ms;
+  text-align: center;
+}
+
+.keywords li:hover {
+  background-color: var(--accent);
+}
+
+.keywords li a {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
