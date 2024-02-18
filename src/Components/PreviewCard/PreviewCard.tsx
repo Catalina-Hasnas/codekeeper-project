@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SearchResultItem } from "../../utils/mapSearchResults";
+import { SearchResultItem } from "utils/mapSearchResults";
 import styles from "./previewCard.module.css";
 
 export const PreviewCard = ({ item }: { item: SearchResultItem }) => {

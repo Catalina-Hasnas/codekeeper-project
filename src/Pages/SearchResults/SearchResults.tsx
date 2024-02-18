@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import useSWR from "swr";
-import { fetcher } from "../../utils/fetcher";
-import { mapSearchResults } from "../../utils/mapSearchResults";
-import { PreviewCard } from "../../Components/PreviewCard/PreviewCard";
+import { fetcher, root } from "utils/fetcher";
+import { mapSearchResults } from "utils/mapSearchResults";
+import { PreviewCard } from "Components/PreviewCard";
 import styles from "./searchResults.module.css";
-import { FilterResults } from "../../Components/FilterResults/FilterResults";
-import { objectToUrlParams } from "../../utils/objToUrlParams";
+import { FilterResults } from "Components/FilterResults";
+import { objectToUrlParams } from "utils/objToUrlParams";
 
 export const SearchResults = () => {
   const [searchParams] = useSearchParams();
@@ -16,10 +16,7 @@ export const SearchResults = () => {
     data: rawData,
     error,
     isLoading,
-  } = useSWR(
-    `https://images-api.nasa.gov/search?${urlParams}&media_type=image`,
-    fetcher
-  );
+  } = useSWR(`${root}/search?${urlParams}&media_type=image`, fetcher);
 
   if (isLoading) {
     return <p>loading...</p>;

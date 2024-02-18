@@ -1,4 +1,4 @@
-import { SearchResultItem } from "../../utils/mapSearchResults";
+import { SearchResultItem } from "utils/mapSearchResults";
 import styles from "./itemDetails.module.css";
 
 const dateOptions: Intl.DateTimeFormatOptions = {

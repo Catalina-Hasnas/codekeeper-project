@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { fetcher } from "../../utils/fetcher";
+import { fetcher, root } from "utils/fetcher";
 import useSWR from "swr";
-import { mapSearchResults } from "../../utils/mapSearchResults";
-import { BackButton } from "../../Components/ItemDetails/BackButton";
-import { ItemInfo } from "../../Components/ItemDetails/ItemInfo";
+import { mapSearchResults } from "utils/mapSearchResults";
+import { BackButton } from "Components/ItemDetails/BackButton";
+import { ItemInfo } from "Components/ItemDetails/ItemInfo";
 import styles from "./detailsPage.module.css";
 
 const findSmallImage = (arr: string[]) => {
@@ -17,7 +17,7 @@ export const DetailsPage = () => {
     data: rawData,
     error,
     isLoading,
-  } = useSWR(`https://images-api.nasa.gov/search?nasa_id=${nasa_id}`, fetcher);
+  } = useSWR(`${root}/search?nasa_id=${nasa_id}`, fetcher);
 
   const { data: rawImageData, isLoading: imageIsLoading } = useSWR(
     rawData ? rawData.collection.items[0].href : null,

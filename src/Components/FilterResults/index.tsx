@@ -1,1 +1,1 @@
-export { FilteredResults } from "./FilteredResults";
+export { FilterResults } from "./FilterResults";
