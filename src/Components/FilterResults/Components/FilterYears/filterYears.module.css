@@ -1,52 +1,29 @@
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown button {
+.yearForm {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 14rem;
-  background-color: var(--elements);
-  color: inherit;
-  padding-block: 1.5em;
-  padding-inline: 1em;
-  border: none;
-  border-radius: var(--app-border-radius);
+  gap: 2em;
 }
 
-.dropdown button:focus {
-  outline: 2px solid var(--accent);
-}
-
-.dropdownContent {
+.yearFormItem {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  gap: 0.5em;
-  width: 100%;
+}
+
+.yearFormItem label {
+  padding-block-end: 0.2em;
+}
+
+.yearFormItem input {
+  border: none;
   background-color: var(--elements);
-  overflow: auto;
-  z-index: 1;
-  margin-block-start: 0.3em;
   border-radius: var(--app-border-radius);
-  padding-block: 0.3em;
+  color: inherit;
+  width: 100%;
+  font-family: inherit;
+  padding-block: 0.8em;
 }
 
-.dropdownContent li {
-  padding-block: 0.2em;
-  padding-inline: 1.5em;
-}
-
-.dropdownContent li:hover {
-  background-color: var(--accent);
-}
-
-.dropdownContent li a {
-  display: block;
-}
-
-.dropdownIconColor {
-  fill: var(--text);
+.yearForm button {
+  background-color: var(--elements);
+  border-radius: var(--app-border-radius);
+  padding-inline: 1em;
 }

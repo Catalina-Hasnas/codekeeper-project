@@ -6,6 +6,10 @@ import { BackButton } from "../../Components/ItemDetails/BackButton";
 import { ItemInfo } from "../../Components/ItemDetails/ItemInfo";
 import styles from "./detailsPage.module.css";
 
+const findSmallImage = (arr: string[]) => {
+  return arr.find((imageName) => imageName.includes("~small"));
+};
+
 export const DetailsPage = () => {
   const { nasa_id } = useParams();
 
@@ -15,11 +19,14 @@ export const DetailsPage = () => {
     isLoading,
   } = useSWR(`https://images-api.nasa.gov/search?nasa_id=${nasa_id}`, fetcher);
 
-  if (isLoading) {
+  const { data: rawImageData, isLoading: imageIsLoading } = useSWR(
+    rawData ? rawData.collection.items[0].href : null,
+    fetcher
+  );
+
+  if (isLoading || imageIsLoading) {
     return <p>loading...</p>;
   }
-
-  console.log(rawData);
 
   if (error || rawData.collection.metadata.total_hits === 0) {
     throw new Error("Not found :(");
@@ -36,7 +43,7 @@ export const DetailsPage = () => {
             <img
               className={styles.itemDetailsImage}
               alt={data.title}
-              src={data.thumbnail}
+              src={rawImageData ? findSmallImage(rawImageData) : data.thumbnail}
             ></img>
           </div>
           <ItemInfo {...data} />

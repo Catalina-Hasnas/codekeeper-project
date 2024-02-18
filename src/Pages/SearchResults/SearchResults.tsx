@@ -5,18 +5,19 @@ import { mapSearchResults } from "../../utils/mapSearchResults";
 import { PreviewCard } from "../../Components/PreviewCard/PreviewCard";
 import styles from "./searchResults.module.css";
 import { FilterResults } from "../../Components/FilterResults/FilterResults";
+import { objectToUrlParams } from "../../utils/objToUrlParams";
 
 export const SearchResults = () => {
   const [searchParams] = useSearchParams();
+
+  const urlParams = objectToUrlParams(searchParams);
 
   const {
     data: rawData,
     error,
     isLoading,
   } = useSWR(
-    `https://images-api.nasa.gov/search?q=${
-      searchParams.get("q") ?? ""
-    }&media_type=image`,
+    `https://images-api.nasa.gov/search?${urlParams}&media_type=image`,
     fetcher
   );
 

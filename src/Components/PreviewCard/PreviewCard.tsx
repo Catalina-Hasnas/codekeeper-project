@@ -16,10 +16,10 @@ export const PreviewCard = ({ item }: { item: SearchResultItem }) => {
         <Link to={`/nasa_id/${item.nasa_id}`}>{item.title}</Link>
         <ul>
           <li>
-            <span> Photographer: </span> {item.photographer ?? "unknown"}
+            <span> Photographer: </span> {item.photographer}
           </li>
           <li>
-            <span> Location: </span> {item.location ?? "unknown"}
+            <span> Location: </span> {item.location}
           </li>
         </ul>
       </div>

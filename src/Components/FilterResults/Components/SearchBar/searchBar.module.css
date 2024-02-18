@@ -22,10 +22,6 @@
   font-family: inherit;
 }
 
-.searchBar input:focus {
-  outline: 2px solid var(--accent);
-}
-
 .searchBar input::placeholder {
   color: var(--fill);
   opacity: unset;

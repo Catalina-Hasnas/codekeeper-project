@@ -2,11 +2,11 @@ export type SearchResultItem = {
   thumbnail: string;
   title: string;
   nasa_id: string;
-  location?: string;
-  photographer?: string;
-  description?: string;
+  location: string;
+  photographer: string;
+  description: string;
+  keywords: string[];
   date_created?: string;
-  keywords?: string[];
 };
 
 type SearchResult = {
@@ -16,11 +16,11 @@ type SearchResult = {
         title: string;
         nasa_id: string;
         center: string;
+        date_created?: string;
         location?: string;
         secondary_creator?: string;
         photographer?: string;
         description?: string;
-        date_created?: string;
         keywords?: string[];
       }[];
       links: {
@@ -37,11 +37,11 @@ export const mapSearchResults = (result: SearchResult): SearchResultItem[] => {
     return {
       thumbnail: thumbnailLink,
       title: data.title,
-      location: data.location || data.center,
-      photographer: data.photographer || data.secondary_creator,
       nasa_id: data.nasa_id,
-      description: data.description,
-      keywords: data.keywords,
+      location: data.location || data.center || "unknown",
+      photographer: data.photographer || data.secondary_creator || "unknown",
+      description: data.description || "no description provided",
+      keywords: data.keywords || [],
       date_created: data.date_created,
     };
   });

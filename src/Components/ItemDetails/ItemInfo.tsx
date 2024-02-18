@@ -1,6 +1,12 @@
 import { SearchResultItem } from "../../utils/mapSearchResults";
 import styles from "./itemDetails.module.css";
 
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
 export const ItemInfo = ({
   title,
   date_created,
@@ -9,6 +15,10 @@ export const ItemInfo = ({
   location,
   photographer,
 }: SearchResultItem) => {
+  const dateFormatted = date_created
+    ? new Date(date_created).toLocaleDateString("en-US", dateOptions)
+    : "unknown";
+
   return (
     <div className={styles.itemDetailsInfo}>
       <h2> {title} </h2>
@@ -20,7 +30,7 @@ export const ItemInfo = ({
           <span> Description: </span> {description}
         </li>
         <li>
-          <span> Date Created: </span> {date_created}
+          <span> Date Created: </span> {dateFormatted}
         </li>
         <li>
           <p>
@@ -31,13 +41,15 @@ export const ItemInfo = ({
       <div className={styles.keywords}>
         <h3>Keywords:</h3>
         <ul>
-          {keywords?.map((keyword, index) => {
-            return (
-              <li className="appShadow" key={keyword + index}>
-                {keyword}
-              </li>
-            );
-          })}
+          {keywords.length > 0
+            ? keywords?.map((keyword, index) => {
+                return (
+                  <li className="appShadow" key={keyword + index}>
+                    {keyword}
+                  </li>
+                );
+              })
+            : "No keywords provided"}
         </ul>
       </div>
     </div>
