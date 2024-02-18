@@ -33,9 +33,11 @@ export const SearchResults = () => {
       <>
         <FilterResults />
         <div className={styles.cardsGrid}>
-          {data.map((item) => {
-            return <PreviewCard key={item.nasa_id} item={item} />;
-          })}
+          {data.length > 0
+            ? data.map((item) => {
+                return <PreviewCard key={item.nasa_id} item={item} />;
+              })
+            : "No results found"}
         </div>
       </>
     );
