@@ -1,26 +1,27 @@
 import { useRef } from "react";
 import { SearchBarIcon } from "./Components/SearchBarIcon";
 import styles from "./searchBar.module.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export const SearchBar = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const inputSearchRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (inputSearchRef.current) {
-      if (inputSearchRef.current.value) {
-        navigate({
-          pathname: "/search",
-          search: `?q=${inputSearchRef.current.value}`,
-        });
-      } else {
-        navigate("/");
-      }
+      setSearchParams((searchParams) => {
+        if (inputSearchRef.current?.value) {
+          searchParams.set("q", inputSearchRef.current.value);
+        } else {
+          // removes the query param if the user submits an empty string
+          //TODO: Implement a "remove" button on input in order to remove the filter
+          searchParams.delete("q");
+        }
+        return searchParams;
+      });
     }
   };
 

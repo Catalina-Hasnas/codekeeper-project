@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  redirect,
+  RouterProvider,
+} from "react-router-dom";
 import "./css/globals.css";
 import { DetailsPage } from "./Pages/DetailsPage";
 import { RouterError } from "./Components/RouterError";
@@ -16,6 +20,9 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SearchResults />,
+        loader: () => {
+          return redirect("/search");
+        },
       },
       {
         path: "/search",

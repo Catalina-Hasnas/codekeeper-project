@@ -13,6 +13,8 @@ const findSmallImage = (arr: string[]) => {
 export const DetailsPage = () => {
   const { nasa_id } = useParams();
 
+  console.log(nasa_id);
+
   const {
     data: rawData,
     error,

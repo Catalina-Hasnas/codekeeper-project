@@ -51,7 +51,7 @@ const createSearchParams = ({
   if (startDateNumber === null && isEndDateValid) {
     return { year_end: endDate };
   }
-  //TODO: Throw validation errors here and catch them on submit, notify user of errors
+  //TODO: Throw validation error here and catch them on submit, notify user of errors
   return {};
 };
 
@@ -70,6 +70,7 @@ export const FilterYears = () => {
     });
 
     setSearchParams((searchParams) => {
+      // removes the query params if the user submitted an empty string
       //TODO: Implement a "remove" button on inputs in order to reset the filters
       searchParams.delete("year_start");
       searchParams.delete("year_end");
@@ -81,7 +82,7 @@ export const FilterYears = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.yearForm}>
+    <form onSubmit={handleSubmit} className={styles.yearForm} role="search">
       <div className={styles.yearFormItem}>
         <label htmlFor="year_start">Year Start</label>
         <input
@@ -89,18 +90,20 @@ export const FilterYears = () => {
           type="number"
           className="appShadow"
           name="year_start"
+          id="year_start"
           defaultValue={searchParams.get("year_start") || ""}
-        ></input>
+        />
       </div>
       <div className={styles.yearFormItem}>
-        <label htmlFor="year_end">Year end</label>
+        <label htmlFor="year_end">Year End</label>
         <input
           ref={endYearRef}
           type="number"
           className="appShadow"
           name="year_end"
+          id="year_end"
           defaultValue={searchParams.get("year_end") || ""}
-        ></input>
+        />
       </div>
       <button title="add year filter" type="submit">
         Add filter
