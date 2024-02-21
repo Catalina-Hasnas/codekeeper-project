@@ -23,15 +23,15 @@ const router = createBrowserRouter([
         index: true,
         element: <SearchResults />,
         loader: () => {
-          return redirect("search");
+          return redirect(`${rootPath}search`);
         },
       },
       {
-        path: "search",
+        path: `${rootPath}search`,
         element: <SearchResults />,
       },
       {
-        path: "nasa_id/:nasa_id",
+        path: `${rootPath}nasa_id/:nasa_id`,
         element: <DetailsPage />,
       },
     ],
