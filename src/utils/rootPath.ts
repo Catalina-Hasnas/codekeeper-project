@@ -1,2 +1,2 @@
 export const rootPath =
-  process.env.NODE_ENV !== "production" ? "/" : "codekeeper-project/";
+  process.env.NODE_ENV !== "production" ? "/" : "/codekeeper-project/";
