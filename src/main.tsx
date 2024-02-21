@@ -14,7 +14,7 @@ import { ThemeProvider } from "providers/ThemeProvider";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: process.env.NODE_ENV !== "production" ? "/" : "codekeeper-project/",
     element: <Layout />,
     errorElement: <RouterError />,
     children: [
@@ -22,11 +22,11 @@ const router = createBrowserRouter([
         index: true,
         element: <SearchResults />,
         loader: () => {
-          return redirect("/search");
+          return redirect("search");
         },
       },
       {
-        path: "/search",
+        path: "search",
         element: <SearchResults />,
       },
       {
