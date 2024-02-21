@@ -4,7 +4,6 @@
   flex-direction: column;
   gap: 2em;
   line-height: 1.5rem;
-  padding-block: 2em;
 }
 
 .itemDetailsInfoList {
@@ -14,21 +13,6 @@
 
 .itemDetailsInfoList span {
   font-weight: 600;
-}
-
-@media only screen and (max-width: 64em) {
-  .itemDetailsInfoList {
-    column-count: unset;
-    column-gap: unset;
-  }
-  .itemDetailsContainer {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(1em, 13em) auto auto;
-    grid-template-areas:
-      "image"
-      "description"
-      "border";
-  }
 }
 
 .backButton {

@@ -29,23 +29,30 @@
 }
 
 :root {
+  color-scheme: dark;
+  --background: var(--background-dark);
+  --elements: var(--elements-dark);
+  --text: var(--text-dark);
+  --accent: var(--accent-dark);
+  --fill: var(--text-dark);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: var(--background-dark);
+  --elements: var(--elements-dark);
+  --text: var(--text-dark);
+  --accent: var(--accent-dark);
+  --fill: var(--text-dark);
+}
+
+[data-theme="light"] {
   color-scheme: light;
   --background: var(--background-light);
   --elements: var(--elements-light);
   --text: var(--text-light);
   --accent: var(--accent-light);
   --fill: hsla(var(--text-gray), 0.7);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --background: var(--background-dark);
-    --elements: var(--elements-dark);
-    --text: var(--text-dark);
-    --accent: var(--accent-dark);
-    --fill: var(--text-dark);
-  }
 }
 
 .appShadow {

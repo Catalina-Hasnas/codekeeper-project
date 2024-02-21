@@ -1,6 +1,6 @@
-import { SearchBar } from "./Components/SearchBar/SearchBar";
+import { SearchBar } from "./Components/SearchBar";
 import styles from "./filterResults.module.css";
-import { FilterYears } from "./Components/FilterYears/FilterYears";
+import { FilterYears } from "./Components/FilterYears";
 
 export const FilterResults = () => {
   return (

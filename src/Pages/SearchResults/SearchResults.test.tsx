@@ -12,7 +12,7 @@ const searchBarInput = "apollo";
 const yearStartInput = "2000";
 const yearEndInput = "2020";
 
-test("By default, it displays the results of querying the api by media_type=image", async () => {
+test("By default, it displays the results of calling the api with media_type=image param", async () => {
   server.use(
     http.get("https://images-api.nasa.gov/search", async ({ request }) => {
       expect(request.url).toEqual(
@@ -31,7 +31,7 @@ test("By default, it displays the results of querying the api by media_type=imag
   expect(screen.getByText("nasa_location")).toBeInTheDocument();
 });
 
-test("On user input, it queries the API with search params from search bar", async () => {
+test("On user input, it calls the API with query input from search bar", async () => {
   server.use(
     http.get("https://images-api.nasa.gov/search", async ({ request }) => {
       expect(request.url).toEqual(
@@ -52,10 +52,10 @@ test("On user input, it queries the API with search params from search bar", asy
   await waitForElementToBeRemoved(() => screen.getByText("loading..."));
 });
 
-test("On user input, it queries the API with search params from year start and end inputs", async () => {
+test("On user input, it calls the API with search params year_start and year_end from inputs", async () => {
   server.use(
     http.get("https://images-api.nasa.gov/search", async ({ request }) => {
-      expect(request.url).toBe(
+      expect(request.url).toEqual(
         `https://images-api.nasa.gov/search?media_type=image&q=${searchBarInput}&year_start=${yearStartInput}&year_end=${yearEndInput}`
       );
       return HttpResponse.json(data);

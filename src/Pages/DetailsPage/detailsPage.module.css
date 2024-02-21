@@ -11,9 +11,20 @@
 
 .itemDetailsImageContainer {
   grid-area: image;
-  position: relative;
+  place-self: start center;
 }
 
 .itemDetailsImage {
   object-fit: contain;
+  max-width: 100%;
+}
+
+@media (max-width: 64em) {
+  .itemDetailsContainer {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "image"
+      "description"
+      "border";
+  }
 }
