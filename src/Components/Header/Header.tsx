@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./header.module.css";
 import { useThemeProvider } from "providers/ThemeProvider";
+import { rootPath } from "utils/rootPath";
 
 export const Header = () => {
   const { isDarkTheme, toggleIsDarkTheme } = useThemeProvider();
@@ -8,7 +9,7 @@ export const Header = () => {
   return (
     <header className={`${styles.header} appShadow`}>
       <h1>
-        <Link to={"/"}>NASA Images</Link>
+        <Link to={rootPath}>NASA Images</Link>
       </h1>
       <button
         onClick={(e) => {

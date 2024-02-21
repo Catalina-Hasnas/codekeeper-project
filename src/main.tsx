@@ -11,10 +11,11 @@ import { RouterError } from "./Components/RouterError";
 import { SearchResults } from "./Pages/SearchResults";
 import { Layout } from "./Pages/Layout";
 import { ThemeProvider } from "providers/ThemeProvider";
+import { rootPath } from "utils/rootPath";
 
 const router = createBrowserRouter([
   {
-    path: process.env.NODE_ENV !== "production" ? "/" : "codekeeper-project/",
+    path: rootPath,
     element: <Layout />,
     errorElement: <RouterError />,
     children: [
