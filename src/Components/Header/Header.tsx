@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     <header className={`${styles.header} appShadow`}>
       <h1>
-        <Link to={"/"}>Nasa Images</Link>
+        <Link to={"/"}>NASA Images</Link>
       </h1>
     </header>
   );
