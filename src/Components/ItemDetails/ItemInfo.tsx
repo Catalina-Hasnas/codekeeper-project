@@ -1,12 +1,6 @@
 import { SearchResultItem } from "utils/mapSearchResults";
 import styles from "./itemDetails.module.css";
 
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-
 export const ItemInfo = ({
   title,
   date_created,
@@ -15,10 +9,6 @@ export const ItemInfo = ({
   location,
   photographer,
 }: SearchResultItem) => {
-  const dateFormatted = date_created
-    ? new Date(date_created).toLocaleDateString("en-US", dateOptions)
-    : "unknown";
-
   return (
     <div className={styles.itemDetailsInfo}>
       <h2> {title} </h2>
@@ -30,7 +20,7 @@ export const ItemInfo = ({
           <span> Description: </span> {description}
         </li>
         <li>
-          <span> Date Created: </span> {dateFormatted}
+          <span> Date Created: </span> {date_created}
         </li>
         <li>
           <p>

@@ -13,8 +13,6 @@ const findSmallImage = (arr: string[]) => {
 export const DetailsPage = () => {
   const { nasa_id } = useParams();
 
-  console.log(nasa_id);
-
   const {
     data: rawData,
     error,
@@ -22,7 +20,7 @@ export const DetailsPage = () => {
   } = useSWR(`${root}/search?nasa_id=${nasa_id}`, fetcher);
 
   const { data: rawImageData, isLoading: imageIsLoading } = useSWR(
-    rawData ? rawData.collection.items[0].href : null,
+    rawData ? rawData?.collection?.items[0]?.href : null,
     fetcher
   );
 
@@ -30,7 +28,7 @@ export const DetailsPage = () => {
     return <p>loading...</p>;
   }
 
-  if (error || rawData.collection.metadata.total_hits === 0) {
+  if (error || rawData?.collection?.metadata?.total_hits === 0) {
     throw new Error("Not found :(");
   }
 

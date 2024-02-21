@@ -1,55 +1,27 @@
-import { afterAll, afterEach, beforeAll } from "vitest";
-import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
 import {
   render,
   waitForElementToBeRemoved,
   screen,
+  fireEvent,
 } from "utils/testUtils/render";
 import { SearchResults } from "./SearchResults";
+import { data, server } from "utils/testUtils/server";
 
-const data = {
-  collection: {
-    items: [
-      {
-        data: [
-          {
-            title: "The title",
-            nasa_id: "nasa_id",
-            center: "nasa_center",
-            date_created: new Date(),
-            location: "nasa_location",
-            secondary_creator: "creator",
-            photographer: "photographer",
-            description: "description",
-            keywords: ["first keyword", "second keyword"],
-          },
-        ],
-        links: [
-          {
-            href: "link",
-          },
-        ],
-      },
-    ],
-  },
-};
+const searchBarInput = "apollo";
+const yearStartInput = "2000";
+const yearEndInput = "2020";
 
-export const restHandlers = [
-  http.get("https://images-api.nasa.gov/search", async () => {
-    return HttpResponse.json(data);
-  }),
-];
+test("By default, it displays the results of querying the api by media_type=image", async () => {
+  server.use(
+    http.get("https://images-api.nasa.gov/search", async ({ request }) => {
+      expect(request.url).toEqual(
+        "https://images-api.nasa.gov/search?media_type=image"
+      );
+      return HttpResponse.json(data);
+    })
+  );
 
-const server = setupServer(...restHandlers);
-
-beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
-
-afterAll(() => server.close());
-
-afterEach(() => server.resetHandlers());
-
-test("It displays the results of querying the api by media_type=image", async () => {
   render(<SearchResults />);
 
   await waitForElementToBeRemoved(() => screen.getByText("loading..."));
@@ -59,12 +31,46 @@ test("It displays the results of querying the api by media_type=image", async ()
   expect(screen.getByText("nasa_location")).toBeInTheDocument();
 });
 
-// test("It queries the API using search params from user input", async () => {
-//   const params = new URLSearchParams(window.location.search);
-//   params.set("q", "apollo");
-//   window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
+test("On user input, it queries the API with search params from search bar", async () => {
+  server.use(
+    http.get("https://images-api.nasa.gov/search", async ({ request }) => {
+      expect(request.url).toEqual(
+        `https://images-api.nasa.gov/search?media_type=image&q=${searchBarInput}`
+      );
+      return HttpResponse.json(data);
+    })
+  );
 
-//   render(<SearchResults />);
+  render(<SearchResults />);
 
-//   // expect(request.searchParams.get("q")).toBe("apollo");
-// });
+  const input = screen.getByPlaceholderText("Search for a keyword...");
+  const button = screen.getByRole("button", { name: /search/i });
+
+  fireEvent.change(input, { target: { value: searchBarInput } });
+  fireEvent.click(button);
+
+  await waitForElementToBeRemoved(() => screen.getByText("loading..."));
+});
+
+test("On user input, it queries the API with search params from year start and end inputs", async () => {
+  server.use(
+    http.get("https://images-api.nasa.gov/search", async ({ request }) => {
+      expect(request.url).toBe(
+        `https://images-api.nasa.gov/search?media_type=image&q=${searchBarInput}&year_start=${yearStartInput}&year_end=${yearEndInput}`
+      );
+      return HttpResponse.json(data);
+    })
+  );
+
+  render(<SearchResults />, { initialEntries: ["/search?q=apollo"] });
+
+  const startYearInput = screen.getByRole("spinbutton", { name: "Year Start" });
+  const endYearInput = screen.getByRole("spinbutton", { name: "Year End" });
+  const button = screen.getByText("Add filter");
+
+  fireEvent.change(startYearInput, { target: { value: yearStartInput } });
+  fireEvent.change(endYearInput, { target: { value: yearEndInput } });
+  fireEvent.click(button);
+
+  await waitForElementToBeRemoved(() => screen.getByText("loading..."));
+});

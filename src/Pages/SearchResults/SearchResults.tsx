@@ -16,7 +16,10 @@ export const SearchResults = () => {
     data: rawData,
     error,
     isLoading,
-  } = useSWR(`${root}/search?${urlParams}&media_type=image`, fetcher);
+  } = useSWR(
+    `${root}/search?media_type=image${urlParams ? "&" + urlParams : ""}`,
+    fetcher
+  );
 
   if (isLoading) {
     return <p>loading...</p>;

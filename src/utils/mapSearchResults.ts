@@ -6,28 +6,36 @@ export type SearchResultItem = {
   photographer: string;
   description: string;
   keywords: string[];
-  date_created?: string;
+  date_created: string;
 };
 
-type SearchResult = {
+type DataType = {
+  title: string;
+  nasa_id: string;
+  center: string;
+  date_created?: string;
+  location?: string;
+  secondary_creator?: string;
+  photographer?: string;
+  description?: string;
+  keywords?: string[];
+};
+
+export type SearchResult = {
   collection: {
     items: {
-      data: {
-        title: string;
-        nasa_id: string;
-        center: string;
-        date_created?: string;
-        location?: string;
-        secondary_creator?: string;
-        photographer?: string;
-        description?: string;
-        keywords?: string[];
-      }[];
+      data: DataType[];
       links: {
         href: string;
       }[];
     }[];
   };
+};
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 };
 
 export const mapSearchResults = (result: SearchResult): SearchResultItem[] => {
@@ -42,7 +50,9 @@ export const mapSearchResults = (result: SearchResult): SearchResultItem[] => {
       photographer: data.photographer || data.secondary_creator || "unknown",
       description: data.description || "no description provided",
       keywords: data.keywords || [],
-      date_created: data.date_created,
+      date_created: data.date_created
+        ? new Date(data.date_created).toLocaleDateString("en-US", dateOptions)
+        : "unknown",
     };
   });
 };
